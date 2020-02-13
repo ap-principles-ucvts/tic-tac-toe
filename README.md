@@ -15,7 +15,7 @@ This is a pretty simple game, and one we've all played at some point in our live
   - Whose turn is it?
 - Allow each player to mark the board with an X or an O in alternating fashion.
   - Prevent players from overwriting each others' marks.
-- Provide a means by which to reset the game and play again.
+- Provide a means to reset the game and play again.
 
 ## Basic Structure
 
