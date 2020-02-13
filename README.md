@@ -8,14 +8,14 @@ Follow along carefully. Although you're copying what I'm doing, it's important t
 
 This is a pretty simple game, and one we've all played at some point in our lives. The requirements aren't too extensive, but they are precise.
 
-* Display a 3-by-3 grid of squares.
-* Indicate the current state of the game.
-  * Has a player won, and if so, who?
-  * Has the game ended in a tie?
-  * Whose turn is it?
-* Allow each player to mark the board with an X or an O in alternating fashion.
-  * Prevent players from overwriting each others' marks.
-* Provide a means by which to reset the game and play again.
+- Display a 3-by-3 grid of squares.
+- Indicate the current state of the game.
+  - Has a player won, and if so, who?
+  - Has the game ended in a tie?
+  - Whose turn is it?
+- Allow each player to mark the board with an X or an O in alternating fashion.
+  - Prevent players from overwriting each others' marks.
+- Provide a means by which to reset the game and play again.
 
 ## Basic Structure
 
@@ -23,14 +23,14 @@ Before we dive into the requirements, let's create our project structure. Every 
 
 Inside of your parent folder, create two additional folders.
 
-* `css`
-* `js`
+- `css`
+- `js`
 
 And three files.
 
-* `index.html`
-* `js/app.js`
-* `css/styles.css`
+- `index.html`
+- `js/app.js`
+- `css/styles.css`
 
 Now, your project structure should look like this.
 
@@ -73,7 +73,10 @@ Lastly, hook up your CSS and JavaScript to your HTML template.
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-    <link href="https://fonts.googleapis.com/css?family=Major+Mono+Display" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Major+Mono+Display"
+      rel="stylesheet"
+    />
     <link href="css/styles.css" rel="stylesheet" type="text/css" />
     <script defer src="js/app.js"></script>
 
@@ -119,7 +122,11 @@ Put this in the `body` of your HTML.
 </div>
 ```
 
-Without a little CSS, our board isn't going to look very much like a board. So let's style it - and feel free to modify these styles however you'd like!
+Without a little CSS, our board isn't going to look very much like a board. Go ahead and open up your `index.html` file in the browser and you'll see what I mean.
+
+![unstyled](./images/unstyled-board.png)
+
+Pretty ugly, I know. So let's style it - and feel free to modify these styles however you'd like!
 
 ```css
 /*
@@ -158,12 +165,14 @@ h2 {
 /*
  * The container is a flex-box, which is a powerful layout tool. It grows
  * dyanamically, and allows us to position our elements with precision.
+ *
+ * This encloses everything from the turn indicator to the reset button.
  */
 
 .container {
-  display: flex;           /* set our display property to use flex-box */
+  display: flex; /* set our display property to use flex-box */
   justify-content: center; /* center container horizontally */
-  align-items: center;     /* center content vertically */
+  align-items: center; /* center content vertically */
 }
 
 /*
@@ -176,14 +185,25 @@ h2 {
   width: 100%;
   flex-direction: column; /* align children in columns instead of rows */
 }
+```
 
+We're not done yet, but we've made some progress. Refresh the page and you'll see that our fonts have been applied, and everything is positioned in a vertical column centered on the page.
+
+![partially styled](./images/partially-styled-1.png)
+
+Where's the board, though? Since the `div`s representing the board and its interior squares are empty, there's nothing to display. We can add borders to render the grid on the page.
+
+```css
 /*
  * This ensures that we get three rows of three squares, rather than a single
  * row of nine squares.
+ *
+ * The height and width are based on the size of the squares, which includes
+ * their borders.
  */
 
 .wrap {
-  flex-wrap: wrap; /* tells container to drop down once it reaches max-width */
+  flex-wrap: wrap; /* tells squares to drop down if width is exceeded */
   height: 456px;
   width: 456px;
 }
@@ -207,7 +227,15 @@ h2 {
   background-color: lightgray;
   cursor: pointer;
 }
+```
 
+Refresh again and things should be much closer to what we want. The board is now visible, and the squares highlight when we hover over them.
+
+![partially styled](./images/partially-styled-2.png)
+
+The only thing left to style is the reset button.
+
+```css
 /*
  * The reset button sits just below the board.
  */
@@ -234,6 +262,8 @@ h2 {
   cursor: pointer;
 }
 ```
+
+![styled](./images/styled.png)
 
 Flexbox is a powerful layout tool, but there's a bit of a learning curve associated with it. Don't be shy - [dive into the documentation](https://css-tricks.com/snippets/css/a-guide-to-flexbox/) and try it out yourself!
 
@@ -265,13 +295,9 @@ We also need a function to initialize the state of our game (i.e., construct the
 
 ```javascript
 function init() {
-  board = [
-    "", "", "",
-    "", "", "",
-    "", "", ""
-  ];
+  board = ["", "", "", "", "", "", "", "", ""];
 
-  render();   // we'll write this later
+  render(); // we'll write this later
 }
 ```
 
@@ -314,7 +340,7 @@ Now, we're going to use our `squares` array in the `render` function.
 ```javascript
 function render() {
   board.forEach(function(mark, index) {
-    squares[index].textContent = mark;    // writes an X or an O on board
+    squares[index].textContent = mark; // writes an X or an O on board
   });
 }
 ```
@@ -333,11 +359,7 @@ We're going to initialize the `turn` variable in the `init` function.
 
 ```javascript
 function init() {
-  board = [
-    "", "", "",
-    "", "", "",
-    "", "", ""
-  ];
+  board = ["", "", "", "", "", "", "", "", ""];
 
   turn = "X";
 
@@ -370,13 +392,17 @@ function takeTurn(e) {
   });
 
   board[index] = turn;
-  turn = turn === "X" ? "O" : "X";  // alternate turns
+  turn = turn === "X" ? "O" : "X"; // alternate turns
 
   render();
 }
 ```
 
-If we test our code, it looks like it's working. Click a few squares and you'll see it renders Xs and Os in alternating fashion. The font is tiny, though, so let's fix that.
+If we test our code, it looks like it's working. Click a few squares and you'll see it renders Xs and Os in alternating fashion. The font is pretty tiny, though.
+
+![tiny font](./images/tiny-font.png)
+
+Modify the existing `.square` class in your `styles.css` file to make the Xs and Os bigger.
 
 ```css
 .square {
@@ -389,12 +415,14 @@ If we test our code, it looks like it's working. Click a few squares and you'll 
 }
 ```
 
-A quick change to the `.square` class and we're all set. We increased the `font-size` and `line-height`.
+There we go - an increase to the `font-size` and `line-height` did the trick.
+
+![tiny font](./images/big-font.png)
 
 Everything looks good, but the subheader (that indicates whose turn it is) isn't updating. Let's fix that. Whenever we render the board, we'll update the subheader with the correct player. First, create another variable in the cached references section.
 
 ```javascript
-const message = document.querySelector("h2");   // grab the subheader
+const message = document.querySelector("h2"); // grab the subheader
 ```
 
 Then, update `render` to dynamically give our subheader a value.
@@ -402,7 +430,7 @@ Then, update `render` to dynamically give our subheader a value.
 ```javascript
 function render() {
   board.forEach(function(mark, index) {
-    squares[index].textContent = mark;    // writes an X or an O on board
+    squares[index].textContent = mark; // writes an X or an O on board
   });
 
   message.textContent = `Turn: ${turn}`;
@@ -421,11 +449,7 @@ Just like with `turn`, we need to add a line to the `init` function to initializ
 
 ```javascript
 function init() {
-  board = [
-    "", "", "",
-    "", "", "",
-    "", "", ""
-  ];
+  board = ["", "", "", "", "", "", "", "", ""];
 
   turn = "X";
   win = null;
@@ -453,7 +477,8 @@ As an aside, we're first checking that there's something in `board[0]`. If all t
 Moving on... While this works, it seems like a lot of repetitive code. How about ternary statements?
 
 ```javascript
-win = board[0] && board[0] === board[1] && board[1] === board[2] ? board[0] : null;  // X, O, or null
+win =
+  board[0] && board[0] === board[1] && board[1] === board[2] ? board[0] : null; // X, O, or null
 
 // and so on, and so forth
 ```
