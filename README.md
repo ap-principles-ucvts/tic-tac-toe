@@ -124,7 +124,7 @@ Put this in the `body` of your HTML.
 
 Without a little CSS, our board isn't going to look very much like a board. Go ahead and open up your `index.html` file in the browser and you'll see what I mean.
 
-![unstyled](./images/unstyled-board.png)
+> ![unstyled](./images/unstyled-board.png)
 
 Pretty ugly, I know. So let's style it - and feel free to modify these styles however you'd like!
 
@@ -189,7 +189,7 @@ h2 {
 
 We're not done yet, but we've made some progress. Refresh the page and you'll see that our fonts have been applied, and everything is positioned in a vertical column centered on the page.
 
-![partially styled](./images/partially-styled-1.png)
+> ![partially styled](./images/partially-styled-1.png)
 
 Where's the board, though? Since the `div`s representing the board and its interior squares are empty, there's nothing to display. We can add borders to render the grid on the page.
 
@@ -231,7 +231,7 @@ Where's the board, though? Since the `div`s representing the board and its inter
 
 Refresh again and things should be much closer to what we want. The board is now visible, and the squares highlight when we hover over them.
 
-![partially styled](./images/partially-styled-2.png)
+> ![partially styled](./images/partially-styled-2.png)
 
 The only thing left to style is the reset button.
 
@@ -263,7 +263,7 @@ The only thing left to style is the reset button.
 }
 ```
 
-![styled](./images/styled.png)
+> ![styled](./images/styled.png)
 
 Flexbox is a powerful layout tool, but there's a bit of a learning curve associated with it. Don't be shy - [dive into the documentation](https://css-tricks.com/snippets/css/a-guide-to-flexbox/) and try it out yourself!
 
